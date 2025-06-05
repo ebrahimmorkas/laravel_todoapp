@@ -4,8 +4,10 @@ use App\Http\Controllers\AuthControllers\AuthController;
 use App\Http\Controllers\AuthControllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('dashboard');
+    });
 });
 
 Route::get('/register', function() {
@@ -20,7 +22,7 @@ Route::get('/register', [AuthController::class, 'showRegister']);
 Route::post('/register', [AuthController::class, 'register']);
 
 // Login Controllers
-Route::get('/login', [LoginController::class, 'showLogin']);
+Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
 // Logout route
