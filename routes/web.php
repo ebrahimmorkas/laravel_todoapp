@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthControllers\AuthController;
+use App\Http\Controllers\AuthControllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 
 Route::get('/register', function() {
@@ -14,5 +15,18 @@ Route::get('/dashboard', function() {
     return view('dashboard');
 });
 
+// Signin Controllers
 Route::get('/register', [AuthController::class, 'showRegister']);
 Route::post('/register', [AuthController::class, 'register']);
+
+// Login Controllers
+Route::get('/login', [LoginController::class, 'showLogin']);
+Route::post('/login', [LoginController::class, 'login']);
+
+// Logout route
+Route::post('/logout', function() {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/');
+});

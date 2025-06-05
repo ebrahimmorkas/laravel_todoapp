@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\AuthControllers;
+use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -32,6 +32,6 @@ class AuthController extends Controller
         Auth::login($user);
 
         // Redirecting the user
-        return redirect('/dashboard');
+        return redirect('/');
     }
 }
