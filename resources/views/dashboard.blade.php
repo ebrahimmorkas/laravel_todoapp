@@ -20,7 +20,11 @@
                             {{ $todo->title }}
                             <div>
                                 <a href="/edit/{{ $todo->id }}" class="btn btn-sm btn-warning">Edit</a>
-                                
+                                <form action="/destroy/{{ $todo -> id }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </form>
                             </div>
                         </li>
                     @endforeach

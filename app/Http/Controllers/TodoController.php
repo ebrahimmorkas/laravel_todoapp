@@ -51,4 +51,18 @@ class TodoController extends Controller
 
         return view('todos.edit');
     }
+
+    // Function to destroy the todo
+    public function destroy($id) {
+        $todo = Todo::findOrFail($id);
+
+        // Making sure that user can delete only his todo's
+        if($todo->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        $todo->delete();
+
+        return redirect('/')->with('success', 'Todo deleteed successfully');
+    }
 }

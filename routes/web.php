@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
     Route::get('/create', [TodoController::class, 'create']);
     Route::post('/store', [TodoController::class,'store']);
+    Route::delete('/destroy/{id}',[TodoController::class, 'destroy']);
     Route::get('/edit/{id}', [TodoController::class,'edit']);
 });
 
