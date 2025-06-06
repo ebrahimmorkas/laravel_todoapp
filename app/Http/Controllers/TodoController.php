@@ -11,7 +11,8 @@ class TodoController extends Controller
     // Show all the todos
     public function index() {
         if(Auth::check()) {
-            $todos = Todo::all();
+            // $todos = Todo::all();
+            $todos = Todo::where('user_id', Auth::id())->get();
         }
         else {
             $todos = collect();
