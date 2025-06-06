@@ -21,13 +21,13 @@
 
     <!-- If user not login -->
     @guest
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul></ul>
         <div class="d-flex">
             <a class="btn btn-outline-success mx-5" href="'/login">Login</a>
             <a class="btn btn-success" href="/register">Sign Up</a>
         </div>
-    </div>
+    </div> -->
     @endguest
   </div>
 </nav>

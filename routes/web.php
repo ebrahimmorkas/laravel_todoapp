@@ -2,22 +2,23 @@
 
 use App\Http\Controllers\AuthControllers\AuthController;
 use App\Http\Controllers\AuthControllers\LoginController;
+use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 
+// Defning middleware
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('dashboard');
-    });
+    Route::get('/create', [TodoController::class, 'create']);
+    Route::post('/store', [TodoController::class,'store']);
+    Route::get('/edit/{id}', [TodoController::class,'edit']);
 });
 
-Route::get('/register', function() {
-    return view('auth.register');
-});
-Route::get('/dashboard', function() {
-    return view('dashboard');
-});
+// Route::get('/', function () {
+//     return view('dashboard');
+// });
 
-// Signin Controllers
+Route::get('/', [TodoController::class,'index']);
+
+// Register Controllers
 Route::get('/register', [AuthController::class, 'showRegister']);
 Route::post('/register', [AuthController::class, 'register']);
 
