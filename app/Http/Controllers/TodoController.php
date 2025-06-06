@@ -40,6 +40,17 @@ class TodoController extends Controller
         return redirect('/')->with('success', 'Todo created successfully');
     }
 
+    
+    // Function to destroy the todo
+    public function destroy($id) {
+        $todo = Todo::findOrFail($id);
+        
+        if($todo->user_id !== Auth::id()) {
+            abort(403);
+        }
+        return redirect('/')->with('success', 'ToDo deleted successfully');
+    }
+
     // function to display the form for edit
     public function edit($id) {
         $todo = Todo::findOrFail($id);
@@ -49,20 +60,25 @@ class TodoController extends Controller
             abort(403);
         }
 
-        return view('todos.edit');
+        return view('todos.edit', compact('todo'));
     }
 
-    // Function to destroy the todo
-    public function destroy($id) {
+    // function to update the todo
+    public function update(Request $request, $id) {
+        $validatedResponse = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:255']
+        ]);
+
         $todo = Todo::findOrFail($id);
 
-        // Making sure that user can delete only his todo's
         if($todo->user_id !== Auth::id()) {
             abort(403);
         }
 
-        $todo->delete();
+        $todo->update($request->all());
+        $todo -> save();
 
-        return redirect('/')->with('success', 'Todo deleteed successfully');
+        return redirect('/')->with('success', 'Todo updated successfully');
     }
 }

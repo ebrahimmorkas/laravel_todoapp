@@ -11,6 +11,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/store', [TodoController::class,'store']);
     Route::delete('/destroy/{id}',[TodoController::class, 'destroy']);
     Route::get('/edit/{id}', [TodoController::class,'edit']);
+    Route::patch('/update/{id}', [TodoController::class, 'update']);
 });
 
 // Route::get('/', function () {
