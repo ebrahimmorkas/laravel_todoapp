@@ -12,6 +12,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/destroy/{id}',[TodoController::class, 'destroy']);
     Route::get('/edit/{id}', [TodoController::class,'edit']);
     Route::patch('/update/{id}', [TodoController::class, 'update']);
+    Route::get('/show/{id}', [TodoController::class, 'show']);
 });
 
 // Route::get('/', function () {

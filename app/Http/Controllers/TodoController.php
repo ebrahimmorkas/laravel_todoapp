@@ -82,4 +82,14 @@ class TodoController extends Controller
 
         return redirect('/')->with('success', 'Todo updated successfully');
     }
+
+    public function show($id) {
+        $todo = Todo::findOrFail($id);
+
+        if($todo -> user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        return view('todos.show', compact('todo'));
+    }
 }

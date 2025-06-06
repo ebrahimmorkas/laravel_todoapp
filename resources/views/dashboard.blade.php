@@ -17,7 +17,9 @@
                 <ul class="list-group">
                     @foreach ($todos as $todo)
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            {{ $todo->title }}
+                            <a href="/show/{{ $todo -> id }}">
+                                {{ $todo->title }}
+                            </a>
                             <div>
                                 <a href="/edit/{{ $todo->id }}" class="btn btn-sm btn-warning">Edit</a>
                                 <form action="/destroy/{{ $todo -> id }}" method="POST" class="d-inline">
@@ -29,9 +31,12 @@
                         </li>
                     @endforeach
                 </ul>
-            @endif
+                @endif
+            </div>
         </div>
-    </div>
+        <center class="my-5">
+            <a href="/create" class="btn btn-primary">+ Add More Todo's</a>
+        </center>
 </div>
     @endauth
 
